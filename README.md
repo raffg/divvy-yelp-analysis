@@ -2,13 +2,16 @@
 This repo is my work on the capstone project for IBM's Data Science DevUp program. Project requirements are listed in [this file](DevUp%20Capstone%20Information%20-%20For%20Learners/CBDS%20DevUp%20-%20Data%20Scientist%20-%20Capstone.docx).
 
 Divvy data downloaded from here: https://www.divvybikes.com/system-data
+
 Yelp data downloaded from here: https://www.yelp.com/dataset/download
+
 Kaggle data (for weather) downloaded from here: https://www.kaggle.com/yingwurenjian/chicago-divvy-bicycle-sharing-data
 
 ## Workflow
-1.	Download the datasets from Divvy’s website and from Yelp’s. There is a pre-processed Divvy dataset available on Kaggle but I chose to use Divvy’s raw data and process it myself. I used the Kaggle dataset only to extract weather historical weather data (I have previously used Weather Underground, but they have recently removed free access to their API).
-2.	Divvy provides a live JSON feed of data from their stations. This is the only source of GPS data available (except for the Kaggle dataset). There are a few stations in the 2017 data which are not included in the JSON feed, so I assume these stations have been removed. They were not popular stations and otherwise did not come up in my analysis, so I removed them from analyses which required GPS information.
-3.	Data munging can be followed along in the included Jupyter notebook.
+1. Download the datasets from Divvy’s website and from Yelp’s. There is a pre-processed Divvy dataset available on Kaggle but I chose to use Divvy’s raw data and process it myself. I used the Kaggle dataset only to extract weather historical weather data (I have previously used Weather Underground, but they have recently removed free access to their API).
+2. Divvy provides a live JSON feed of data from their stations. This is the only source of GPS data available (except for the Kaggle dataset). There are a few stations in the 2017 data which are not included in the JSON feed, so I assume these stations have been removed. They were not popular stations and otherwise did not come up in my analysis, so I removed them from analyses which required GPS information.
+3. Data munging can be followed along in the included Jupyter notebook.
+4. Charts made in Tableau with CSV files exported from the Jupyter notebook.
 ## Visualizations
 ### Divvy
 ![Divvy](images/divvy.png)
@@ -43,6 +46,7 @@ I binned the ages into generational categories for this analysis. Additionally, 
 - The majority of riders are between ages 20 and 40, with men accounting for more of the share than women. Even though some ages in the dataset extend all the way up to 120, and many down to 0, I have only included ages between 10 and 80 in this analysis.
 
 #### Busiest bike in Chicago in 2017.
+![(Not the actual bike. Real bike probably all beat to crap.)](images/divvy_bike.png)
 Statistics were calculated in a Tableau file using a CSV output from previous analysis.
 - Bike ID: 2565
 - Rides: 1,489
@@ -50,7 +54,7 @@ Statistics were calculated in a Tableau file using a CSV output from previous an
 - Miles ridden: 2,175
 - Average speed: 5.79 mph
 
-![](images/Rides%20per%20bike.png)
+![Bikes by trip](images/Rides%20per%20bike.png)
 - Each of the 6,243 bikes ridden in 2017 is shown by a single vertical line. The height of the line represents the number of rides taken on that bike and the color shows the total miles ridden.
 - Bike 2565, the busiest bike, is the line on the far left.
 - Possibly some bikes were introduced late in the year and not used as much, but it does appear that a better distribution could be attained by moving bikes around, thus spreading out maintenance evenly.
@@ -116,7 +120,7 @@ The easiest (and possibly the most accurate) method to build a trip duration pre
 
 I used direct line Trip Duration as an input, because the more accurate method of following roads is quite a bit more advanced than the scope of this project. I also wanted to include weather information and went to [Weather Underground](https://www.wunderground.com/weather/api), my go-to API for weather data. However, they, too, have recently gone under a paywall so I downloaded the [Divvy dataset from Kaggle](https://www.kaggle.com/yingwurenjian/chicago-divvy-bicycle-sharing-data), which does include weather data, and joined the weather data into my processed data. I also looked at government statistics regarding [traffic flows](https://www.illinoisvehicle.com/about-us/blog/traffic-patterns-chicago/) in Chicago and added Rush Hour as a feature in my data. I dummified data for day-of-week, month, user type, weather events, and weather conditions.
 
-I used [Scikit Learn’s linear regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) model as well as its [train-test-split](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) function, so I could measure accuracy without any bias. My final accuracy was 69.5%, not very good but not bad at all for an initial pass. And after plotting the data it is clear that a high-accuracy model would not be possible; there’s just too much noise in the data. Some people ride quickly from Point A to Point B, while others take their time (up to several hours!). In this model, I excluded trips over an hour and less than 200 meters, which helped a good deal (not least by removing those trips from Point A to Point A which really threw off the predictions!)
+I used [Scikit Learn’s linear regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) model as well as its [train-test-split](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) function, so I could measure accuracy without any bias. My final accuracy was 69.5%, not very good but not bad at all for an initial pass. And after plotting the data it is clear that a high-accuracy model would not be possible; there’s just too much noise in the data. Some people ride quickly from Point A to Point B, while others take their time (up to several hours!). In this model, I excluded trips over an hour and less than 200 meters, which helped a good deal (not least by removing those trips from Point A to Point A which really threw off the predictions!).
 
 ![scatter plot](images/travel%20time.png)
 - This shows predicted vs actual travel times for a given trip. In a perfect model, all points would lie along the orange line.
