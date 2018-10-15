@@ -78,25 +78,25 @@ For this section, I looked at every entry in the Category column of the Yelp dat
 Almost every cuisine’s most popular descriptor is “Good.” “Great” and “Delicious” also come up a lot. Indian and Korean are exceptions: their most popular adjectives are the “Indian” and “Korean” respectively.
 - All cuisines:
 ![word cloud](images/Word%20Cloud.png)
-- Asian Fusion
+- Asian Fusion:
 ![word cloud](images/Asian%20Fusion.png)
-- Chinese
+- Chinese:
 ![word cloud](images/Chinese.png)
-- French
+- French:
 ![word cloud](images/French.png)
-- Indian
+- Indian:
 ![word cloud](images/Indian.png)
-- Italian
+- Italian:
 ![word cloud](images/Italian.png)
-- Japanese
+- Japanese:
 ![word cloud](images/Japanese.png)
-- Korean
+- Korean:
 ![word cloud](images/Korean.png)
-- Mediterranean
+- Mediterranean:
 ![word cloud](images/Mediterranean.png)
-- Mexican
+- Mexican:
 ![word cloud](images/Mexican.png)
-- Thai
+- Thai:
 ![word cloud](images/Thai.png)
 
 #### Are there any temporal trends?
@@ -123,10 +123,12 @@ I used [Scikit Learn’s linear regression](http://scikit-learn.org/stable/modul
 
 ### Correlation between review length and star rating.
 I find no correlation between review length and start rating. The regression model shows a slight negatively-sloping line comparing the two variables, but the P-value is 0.0 which means we must reject the null hypothesis that the data is correlated. In short, the model would predict a review length of ~700 characters regardless of how many stars were awarded.
+
 ![regression model](images/correlation.png)
 - Review length as a function of star rating
 
 ### Topic modeling
 I performed LDA analysis on the text of the reviews. Processing time became a serious constraint in this part of the project. To help, I took a random sample of 50,000 reviews instead of the more than 600,000 available in total. I removed stop words and lemmatized in order to reduce the sparsity of my matrix and only include meaningful words. Additionally, I removed all punctuation. I did not build bigrams and trigrams, in order to reduce processing time, but feel this is a good area for improvement. Finally, I built LDA models using a number of topics of 5, 10, 15, 20, 30, 40, 50, and 75, and stored the perplexity at each value. Using this, I could plot the perplexity vs number of features and look for an elbow. Unfortunately, I don’t feel I captured the elbow. I need a finer-grained selection of topics numbers and also need to expand the set, possibly up to 300.
+![line chart](images/perplexity.png)
 What I have now is a list of words (which can be seen in the Jupyter Notebook) belonging to each of 50 topics (I chose 50 nearly arbitrarily, although the elbow plot does show a slight bend at this point). The next step would be to have an SME go through these words and manually name each cluster, depending upon the vocabulary. Probable clusters might include café, pizza, quiet, date, etc.
 
