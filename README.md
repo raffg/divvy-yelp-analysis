@@ -30,16 +30,7 @@ Kaggle data (for weather) downloaded from here: https://www.kaggle.com/yingwuren
 
 #### Most popular trips based on start and stop stations
 ![map](images/Most%20popular%20trips%20map.png)
-- Lake Shore Dr & Monroe St – Streeter Dr & Grand Ave
-- Streeter Dr & Grand Ave – Streeter Dr & Grand Ave (same start and stop station)
-- Streeter Dr & Grand Ave – Theater on the Lake
-- Streeter Dr & Grand Ave – Lake Shore Dr & North Blvd
-- Lake Shore Dr & North Blvd – Streeter Dr & Grand Ave
-- Streeter Dr & Grand Ave – Lake Shore Drive and Monroe St
-- Theater on the Lake – Streeter Dr & Grand Ave
-- Lake Shore Drive and Monroe St – Lake Shore Drive and Monroe St (same start and stop station)
-- Streeter Dr & Grand Ave – Michigan Ave & Oak St
-- Streeter Dr & Grand Ave – Millennium Park
+- Many of the most popular routes are doubled, ie Point A to Point B as well as Point B to Point A. Two (shown as a large circle) are circular routes (Point A back to Point A), possibly tourists exploring the city.
  
 #### Rider Performance by gender and age.
 I binned the ages into generational categories for this analysis. Additionally, I excluded ages below 10 and above 80. There are a very small handful of ages in the dataset between 0 and 10 but quite a few at 0 exactly. Also, there were quite a few ages above 100. Both ages at 0 and above 100 seem very suspect but because they were a small portion of the data, excluding them seemed the proper approach.
@@ -86,9 +77,9 @@ For this section, I looked at every entry in the Category column of the Yelp dat
 #### What are the most popular keywords or adjectives reviewers use for each cuisine?
 Almost every cuisine’s most popular descriptor is “Good.” “Great” and “Delicious” also come up a lot. Indian and Korean are exceptions: their most popular adjectives are the “Indian” and “Korean” respectively.
 - All cuisines:
-![word cloud](images/Word%20cloud.png)
+![word cloud](images/Word%20Cloud.png)
 - Asian Fusion
-![word cloud](images/Asian%20fusion.png)
+![word cloud](images/Asian%20Fusion.png)
 - Chinese
 ![word cloud](images/Chinese.png)
 - French
