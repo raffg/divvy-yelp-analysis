@@ -47,6 +47,7 @@ I binned the ages into generational categories for this analysis. Additionally, 
 
 #### Busiest bike in Chicago in 2017.
 ![(Not the actual bike. Real bike probably all beat to crap.)](images/divvy_bike.png)
+
 Statistics were calculated in a Tableau file using a CSV output from previous analysis.
 - Bike ID: 2565
 - Rides: 1,489
@@ -133,6 +134,8 @@ I find no correlation between review length and start rating. The regression mod
 
 ### Topic modeling
 I performed LDA analysis on the text of the reviews. Processing time became a serious constraint in this part of the project. To help, I took a random sample of 50,000 reviews instead of the more than 600,000 available in total. I removed stop words and lemmatized in order to reduce the sparsity of my matrix and only include meaningful words. Additionally, I removed all punctuation. I did not build bigrams and trigrams, in order to reduce processing time, but feel this is a good area for improvement. Finally, I built LDA models using a number of topics of 5, 10, 15, 20, 30, 40, 50, and 75, and stored the perplexity at each value. Using this, I could plot the perplexity vs number of features and look for an elbow. Unfortunately, I don’t feel I captured the elbow. I need a finer-grained selection of topics numbers and also need to expand the set, possibly up to 300.
+
 ![line chart](images/perplexity.png)
+
 What I have now is a list of words (which can be seen in the Jupyter Notebook) belonging to each of 50 topics (I chose 50 nearly arbitrarily, although the elbow plot does show a slight bend at this point). The next step would be to have an SME go through these words and manually name each cluster, depending upon the vocabulary. Probable clusters might include café, pizza, quiet, date, etc.
 
